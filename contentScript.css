@@ -1,7 +1,3 @@
-.redditIcon {
-  cursor: pointer;
-}
-
 #tooltipText {
   background-color: rgba(45, 45, 45, 255);
   display: none;
@@ -28,4 +24,12 @@
   border-style: solid;
   border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent; /* Black color */
   z-index: 10; /* Ensure pointer is above the tooltip box */
+}
+
+.redditIcon {
+  cursor: pointer;
+}
+
+.svgElem {
+  transform: scale(0.7);
 }
