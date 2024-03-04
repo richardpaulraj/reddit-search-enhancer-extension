@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Reddit Search Enhancer",
+  "version": "1.0",
+  "description": "Enhances Google Search with Reddit functionality",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "homepage_url": "https://github.com/richardpaulraj/reddit-search-icon-extension",
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*"],
+      "js": ["contentScript.js"],
+      "css": ["contentScript.css"]
+    }
+  ]
+}

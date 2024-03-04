@@ -1,0 +1,31 @@
+.redditIcon {
+  cursor: pointer;
+}
+
+#tooltipText {
+  background-color: rgba(45, 45, 45, 255);
+  display: none;
+  padding: 8px;
+  padding-bottom: 7px;
+  position: absolute;
+  top: 49px;
+  right: 50px;
+  margin: 0 1rem;
+  border: 1px solid white;
+  font-weight: bold;
+  font-size: 11px;
+  color: white;
+  z-index: 9; /* Ensure tooltip is above other content */
+}
+
+/* Create the pointer */
+#tooltipText::before {
+  content: '';
+  position: absolute;
+  top: -10px; /* Adjust this value to position the pointer correctly */
+  left: calc(50% - 3px); /* Center the pointer horizontally */
+  border-width: 5px; /* Size of the pointer */
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent; /* Black color */
+  z-index: 10; /* Ensure pointer is above the tooltip box */
+}
