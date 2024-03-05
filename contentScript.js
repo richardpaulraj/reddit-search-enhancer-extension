@@ -61,30 +61,42 @@ const observe = () => {
         tooltipText.style.display = 'none'
       })
     }
-    //
-    // Function to add or remove a class based on the presence of '/search' in the URL
-
-    function toggleClassBasedOnURL() {
-      const tooltipText = document.getElementById(`tooltipText`)
-      const svgElem = document.querySelector('.svgElem')
-
-      const currentUrl = window.location.href
-      const containsSearch = currentUrl.includes('/search?q=')
-      console.log(containsSearch)
-      if (containsSearch) {
-        tooltipText.classList.add('insideTooltipText') //Positions
-        svgElem.classList.add('insideSvgElem') //Sizes
-      } else {
-        tooltipText.classList.remove('insideTooltipText') //Positions
-        svgElem.classList.remove('insideSvgElem') //Sizes
-      }
-    }
 
     toggleClassBasedOnURL()
     window.addEventListener('popstate', toggleClassBasedOnURL)
-    //
+
+    redditIcon.addEventListener('click', (e) => {
+      const textArea = document.querySelector('textarea.gLFyf')
+      const textValue = textArea.value.trim()
+
+      if (textValue) {
+        let searchTerm = encodeURIComponent(textValue)
+
+        if (!searchTerm.includes('%20site%3Areddit.com')) {
+          searchTerm += ' site:reddit.com'
+        } else if (searchTerm.includes('%20site%3Areddit.com')) {
+          searchTerm = searchTerm.replace('%20site%3Areddit.com', '')
+        }
+
+        window.location.href = `https://www.google.com/search?q=${searchTerm}`
+      }
+    })
   }
 }
 observe()
 
-// addEventListener('load', observe)
+function toggleClassBasedOnURL() {
+  const tooltipText = document.getElementById(`tooltipText`)
+  const svgElem = document.querySelector('.svgElem')
+
+  const currentUrl = window.location.href
+  const containsSearch = currentUrl.includes('/search?q=')
+
+  if (containsSearch) {
+    tooltipText.classList.add('insideTooltipText') //Positions
+    svgElem.classList.add('insideSvgElem') //Sizes
+  } else {
+    tooltipText.classList.remove('insideTooltipText') //Positions
+    svgElem.classList.remove('insideSvgElem') //Sizes
+  }
+}

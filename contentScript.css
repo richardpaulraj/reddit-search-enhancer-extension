@@ -4,7 +4,7 @@
   padding: 8px;
   padding-bottom: 7px;
   position: absolute;
-  top: 49px;
+  bottom: -32px;
   margin: 0 1rem;
   border: 1px solid white;
   font-weight: bold;
@@ -35,9 +35,10 @@
 }
 
 .insideTooltipText {
-  right: 88px !important;
+  right: 90px !important;
+  bottom: -34px !important;
 }
 
 .insideSvgElem {
-  transform: scale(1.2) !important;
+  transform: scale(0.7) !important;
 }
