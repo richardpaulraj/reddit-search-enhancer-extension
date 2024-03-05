@@ -5,13 +5,13 @@
   padding-bottom: 7px;
   position: absolute;
   top: 49px;
-  right: 50px;
   margin: 0 1rem;
   border: 1px solid white;
   font-weight: bold;
   font-size: 11px;
   color: white;
   z-index: 9; /* Ensure tooltip is above other content */
+  right: 50px;
 }
 
 /* Create the pointer */
@@ -32,4 +32,12 @@
 
 .svgElem {
   transform: scale(0.7);
+}
+
+.insideTooltipText {
+  right: 88px !important;
+}
+
+.insideSvgElem {
+  transform: scale(1.2) !important;
 }

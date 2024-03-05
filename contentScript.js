@@ -12,11 +12,19 @@ const observe = () => {
   //Advanced Playback btn
 
   if (voiceBtn && !document.querySelector('.redditIcon')) {
-    const redditIcon = Object.assign(voiceBtn.cloneNode(true), {
-      textContent: '',
-      style: '',
-      title: '',
-    })
+    const redditIcon = voiceBtn.cloneNode(true)
+
+    // Remove tooltip-related attributes and content
+    redditIcon.removeAttribute('data-tooltip')
+    redditIcon.removeAttribute('title')
+    redditIcon.removeAttribute('jsname')
+    redditIcon.removeAttribute('jscontroller')
+    redditIcon.removeAttribute('jsaction')
+
+    redditIcon.setAttribute('aria-label', 'Reddit Search')
+
+    // Clear innerHTML if tooltip content is included in it
+    redditIcon.innerHTML = ''
 
     redditIcon.classList.replace('XDyW0e', 'redditIcon')
 
@@ -36,33 +44,47 @@ const observe = () => {
 
     voiceBtn.parentNode.insertBefore(redditIcon, voiceBtn)
 
-    tooltipText()
-    toggleTooltip(redditIcon)
-  }
-}
-
-function tooltipText() {
-  const tooltipDisplayText = `
+    const tooltipDisplayText = `
     <div id='tooltipText'>Reddit Search</div>
     `
-  const mainInputBox = document.querySelector('.RNNXgb') //Player
+    mainInputBox.appendChild(
+      document.createRange().createContextualFragment(tooltipDisplayText)
+    )
 
-  mainInputBox.appendChild(
-    document.createRange().createContextualFragment(tooltipDisplayText)
-  )
-}
+    const tooltipText = document.getElementById(`tooltipText`)
 
-function toggleTooltip(icon) {
-  const toggle = document.getElementById(`tooltipText`)
+    if (redditIcon && tooltipText) {
+      redditIcon.addEventListener('mouseenter', () => {
+        tooltipText.style.display = 'block'
+      })
+      redditIcon.addEventListener('mouseleave', () => {
+        tooltipText.style.display = 'none'
+      })
+    }
+    //
+    // Function to add or remove a class based on the presence of '/search' in the URL
 
-  if (icon && toggle) {
-    icon.addEventListener('mouseenter', () => {
-      toggle.style.display = 'block'
-    })
-    icon.addEventListener('mouseleave', () => {
-      toggle.style.display = 'none'
-    })
+    function toggleClassBasedOnURL() {
+      const tooltipText = document.getElementById(`tooltipText`)
+      const svgElem = document.querySelector('.svgElem')
+
+      const currentUrl = window.location.href
+      const containsSearch = currentUrl.includes('/search?q=')
+      console.log(containsSearch)
+      if (containsSearch) {
+        tooltipText.classList.add('insideTooltipText') //Positions
+        svgElem.classList.add('insideSvgElem') //Sizes
+      } else {
+        tooltipText.classList.remove('insideTooltipText') //Positions
+        svgElem.classList.remove('insideSvgElem') //Sizes
+      }
+    }
+
+    toggleClassBasedOnURL()
+    window.addEventListener('popstate', toggleClassBasedOnURL)
+    //
   }
 }
+observe()
 
-addEventListener('load', observe)
+// addEventListener('load', observe)

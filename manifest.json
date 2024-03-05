@@ -21,7 +21,8 @@
     {
       "matches": ["https://www.google.com/*"],
       "js": ["contentScript.js"],
-      "css": ["contentScript.css"]
+      "css": ["contentScript.css"],
+      "run_at": "document_end"
     }
   ]
 }
